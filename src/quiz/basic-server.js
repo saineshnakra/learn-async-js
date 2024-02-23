@@ -36,15 +36,21 @@ const server = http.createServer((req, res) => {
     // Check if the request is for the specified endpoint
     if (pathname.startsWith('/incidents/')) {
         // Extract parameters from the URL
-        const [, , road, location, direction, id] = pathname.split('/');
-
+        console.log(pathname);
+        const [,, road, location, direction, id] = pathname.split('/');
         // Check if all parameters are provided
+        console.log(pathname.split('/'));
         if (road && location && direction && id) {
             // Send response with the extracted parameters
+
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(incidents.filter((incident) => {
                 return incident.id === `MABOS00${id}`
             })));
+        }
+        else{
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('incomplete parameters');      
         }
     } else {
         // If the request is for an unsupported endpoint, send a not found response
