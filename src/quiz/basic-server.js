@@ -45,6 +45,7 @@ const server = http.createServer((req, res) => {
                 return incident.id === `MABOS00${id}`
             })));
         }
+        
         else {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
             res.end('Endpoint not found');
